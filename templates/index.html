@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet">
+</head>
+<body>
+    <script src="static/js/Fetcher.js"></script>
+    <script src="static/js/Item.js"></script>
+    <h1>Current pathing: {{ "/".join(items[0].global_path.split("/")[:-2] if items[0].global_path.split("/")[:-2] else " ") }}</h1>
+    <ul>
+        {% if not is_root %}
+            <li>
+                <a id="back">..</a>
+            </li>
+        {% endif %}
+        {% for item in items %}
+            {% if item.is_img %}
+                <img src="{{ item.static_path }}" width="200vw" alt="doin yo mam doi doi doi doin you mommm">
+            {% else %}
+            <li>
+{#                <form action="/" method="post" id="{{ 'form' + item.global_path }}">#}
+                    <a id="{{ item.global_path }}">{{ item.filename }}</a>
+{#                    <label>#}
+{#                        <input name="path" value="{{ item.global_path }}" style="display: none;">#}
+{#                    </label>#}
+{#                </form>#}
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <script src="static/index.js"></script>
+</body>
+</html>
