@@ -65,9 +65,12 @@ class Cursor:
         self.walk(path)
         media_items = []
         print("All media items:")
-        for item in self.items:
-            if item.is_media and item.global_path != active_item_global_path:
-                print(item)
+        for position, item in enumerate(self.items):
+            if item.is_media:
+                item.set_position(position)
                 media_items.append(item)
+
+                if item.global_path == active_item_global_path:
+                    item.active_item = True
 
         return media_items

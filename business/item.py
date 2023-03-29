@@ -9,6 +9,7 @@ import mimetypes
 class Item:
     def __init__(self, absolute_path):
         self.is_dir = os.path.isdir(absolute_path)
+        self.position = -1
 
         self.global_path = absolute_path + "/" if self.is_dir else absolute_path
         self.static_path = "static/root" + self.global_path
@@ -30,6 +31,8 @@ class Item:
         self.is_media = self.is_video or self.is_img
         self.key = self.global_path
 
+        self.active_item = False
+
         # if self.is_img or self.is_video:
         #     with open(self.global_path, "rb") as media:
         #         self.encoded_string = base64.b64encode(media.read())
@@ -38,6 +41,9 @@ class Item:
 
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__)
+
+    def set_position(self, position):
+        self.position = position
 
     def __str__(self):
         # return json.dumps(self, default=lambda o: o.__dict__())
